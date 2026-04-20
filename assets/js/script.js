@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert(data.data.message);
+                    alert("Guardado correctamente");
                     reportForm.reset();
                     // Clear extra tasks
                     const taskRows = tasksContainer.querySelectorAll('.drg-task-row');
