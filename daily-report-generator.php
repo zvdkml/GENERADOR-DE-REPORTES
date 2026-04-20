@@ -15,6 +15,9 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/db.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/form.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/save.php';
 
+// Activation hook
+register_activation_hook( __FILE__, 'drg_create_db_table' );
+
 /**
  * Register a custom menu page in the WordPress admin dashboard.
  */
