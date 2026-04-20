@@ -70,6 +70,12 @@ function drg_render_shortcode_form() {
             </div>
         </div>
 
+        <div class="drg-form-group">
+            <label>
+                <input type="checkbox" id="drg_modo_automatico" name="modo_automatico"> Modo automático (Distribuir horas)
+            </label>
+        </div>
+
         <button type="button" id="drg-add-task">Agregar tarea</button>
 
         <div class="drg-form-group">
