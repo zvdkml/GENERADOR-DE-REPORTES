@@ -10,6 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+// Include required files
+require_once plugin_dir_path( __FILE__ ) . 'includes/db.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/form.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/save.php';
+
 /**
  * Register a custom menu page in the WordPress admin dashboard.
  */
@@ -25,6 +30,23 @@ function drg_add_admin_menu() {
     );
 }
 add_action( 'admin_menu', 'drg_add_admin_menu' );
+
+/**
+ * Enqueue scripts and styles.
+ */
+function drg_enqueue_assets() {
+    wp_enqueue_style( 'drg-style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', array(), '1.0.0' );
+    wp_enqueue_script( 'drg-script', plugin_dir_url( __FILE__ ) . 'assets/js/script.js', array(), '1.0.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'drg_enqueue_assets' );
+
+/**
+ * Register shortcodes.
+ */
+function drg_register_shortcodes() {
+    add_shortcode( 'daily_report_form', 'drg_render_shortcode_form' );
+}
+add_action( 'init', 'drg_register_shortcodes' );
 
 /**
  * Render the daily report page.
