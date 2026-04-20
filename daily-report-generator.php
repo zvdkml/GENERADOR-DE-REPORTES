@@ -40,6 +40,10 @@ add_action( 'admin_menu', 'drg_add_admin_menu' );
 function drg_enqueue_assets() {
     wp_enqueue_style( 'drg-style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', array(), '1.0.0' );
     wp_enqueue_script( 'drg-script', plugin_dir_url( __FILE__ ) . 'assets/js/script.js', array(), '1.0.0', true );
+
+    wp_localize_script( 'drg-script', 'drg_ajax_obj', [
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+    ] );
 }
 add_action( 'wp_enqueue_scripts', 'drg_enqueue_assets' );
 
@@ -50,6 +54,10 @@ function drg_register_shortcodes() {
     add_shortcode( 'daily_report_form', 'drg_render_shortcode_form' );
 }
 add_action( 'init', 'drg_register_shortcodes' );
+
+// AJAX actions
+add_action( 'wp_ajax_save_daily_report', 'drg_save_daily_report' );
+add_action( 'wp_ajax_nopriv_save_daily_report', 'drg_save_daily_report' );
 
 /**
  * Render the daily report page.

@@ -120,10 +120,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (reportForm) {
         reportForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
             if (!validateTotalHours()) {
-                e.preventDefault();
                 alert('Por favor corrige los errores antes de guardar.');
+                return;
             }
+
+            const formData = new FormData(reportForm);
+            formData.append('action', 'save_daily_report');
+
+            fetch(drg_ajax_obj.ajax_url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.data.message);
+                    reportForm.reset();
+                    // Clear extra tasks
+                    const taskRows = tasksContainer.querySelectorAll('.drg-task-row');
+                    taskRows.forEach((row, index) => {
+                        if (index > 0) row.remove();
+                    });
+                    recalculateHours();
+                } else {
+                    alert('Error: ' + data.data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al procesar el reporte.');
+            });
         });
     }
 });
