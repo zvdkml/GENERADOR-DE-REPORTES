@@ -96,3 +96,33 @@ function drg_render_shortcode_form() {
     <?php
     return ob_get_clean();
 }
+
+/**
+ * Format the report as a text string.
+ *
+ * @param object|array $report The report data from the database.
+ * @return string Formatted report.
+ */
+function drg_format_report( $report ) {
+    if ( is_array( $report ) ) {
+        $report = (object) $report;
+    }
+
+    $output = "Final [" . $report->area . " - " . $report->fecha . "]\n\n";
+
+    $tareas = json_decode( $report->tareas, true );
+    if ( is_array( $tareas ) ) {
+        foreach ( $tareas as $tarea ) {
+            $output .= "✅[" . $tarea['tipo'] . "] " . $tarea['nombre'] . " [" . $tarea['porcentaje_inicio'] . "% - " . $tarea['porcentaje_fin'] . "%] " . $tarea['horas'] . " hrs\n";
+        }
+    }
+
+    if ( $report->pausa_activa ) {
+        $output .= "\n⏲️[PAUSA ACTIVA] descripcion [" . $report->tiempo_pausa . "]\n";
+    }
+
+    $output .= "\n⏰Total horas: " . $report->total_horas . " hrs\n";
+    $output .= "Jefe de área: " . $report->jefe . "\n";
+
+    return $output;
+}
