@@ -1,5 +1,77 @@
-.drg-form-container {
-    border: 1px solid #ccc;
-    padding: 20px;
+.drg-form {
+    max-width: 600px;
     margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+}
+
+.drg-form-group {
+    margin-bottom: 15px;
+}
+
+.drg-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.drg-form-group input[type="text"],
+.drg-form-group input[type="date"],
+.drg-form-group input[type="number"],
+.drg-form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.drg-task-row {
+    padding: 15px;
+    border: 1px solid #eee;
+    background: #fff;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.drg-remove-task {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.drg-remove-task:hover {
+    background: #cc0000;
+}
+
+#drg-add-task {
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#drg-add-task:hover {
+    background: #45a049;
+}
+
+.drg-form-submit button {
+    background: #2196f3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.drg-form-submit button:hover {
+    background: #1e88e5;
 }
